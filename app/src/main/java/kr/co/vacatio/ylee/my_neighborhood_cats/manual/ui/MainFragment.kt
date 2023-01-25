@@ -22,6 +22,20 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        binding.aboutBtn.setOnClickListener {
+            viewModel.setFragment(AboutFragment::class.java.name)
+        }
+
+        binding.guideBtn.setOnClickListener {
+            viewModel.setFragment(GuideFragment::class.java.name)
+        }
+
+        binding.searchBtn.setOnClickListener {
+            viewModel.setFragment(SearchFragment::class.java.name)
+        }
+
+
+
         return binding.root
     }
 

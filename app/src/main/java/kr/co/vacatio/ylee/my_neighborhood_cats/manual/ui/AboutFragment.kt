@@ -22,6 +22,10 @@ class AboutFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        binding.homeBtn.setOnClickListener {
+            viewModel.setFragment(MainFragment::class.java.name)
+        }
+
         return binding.root
     }
 

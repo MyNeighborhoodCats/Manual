@@ -13,8 +13,33 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        supportFragmentManager
+            .beginTransaction()
+            .replace(binding.mainFrame.id, MainFragment.newInstance())
+            .commit()
+
+        viewModel.fragmentName.observe(this) {
+            changeFrame(it)
+        }
+
         setContentView(binding.root)
     }
 
+
+
+    private fun changeFrame(fragmentName: String) {
+        val fragment = when (fragmentName) {
+            MainFragment::class.java.name -> MainFragment.newInstance()
+            AboutFragment::class.java.name -> AboutFragment.newInstance()
+            GuideFragment::class.java.name -> GuideFragment.newInstance()
+            SearchFragment::class.java.name -> SearchFragment.newInstance()
+            else -> null
+        } ?: return
+
+        supportFragmentManager.beginTransaction()
+            .replace(binding.mainFrame.id, fragment, fragmentName)
+            .addToBackStack(fragmentName)
+            .commit()
+    }
 
 }
