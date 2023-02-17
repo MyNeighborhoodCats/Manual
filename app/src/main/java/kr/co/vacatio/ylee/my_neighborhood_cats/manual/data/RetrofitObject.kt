@@ -11,7 +11,6 @@ import javax.net.ssl.TrustManagerFactory
 import javax.net.ssl.X509TrustManager
 
 object RetrofitObject {
-    // TODO { modify baseURL }
     private const val baseUrl = BuildConfig.SERVER_URL_DEV
     //    private const val baseUrl = BuildConfig.SERVER_URL
 
@@ -19,6 +18,10 @@ object RetrofitObject {
     // http ver : false, https ver : true
     private val retrofit = createRetrofit(false)
 //    private val retrofit = createRetrofit(true)
+
+    val getIntroService = retrofit.create(IIntro::class.java)
+    val getEndingService = retrofit.create(IEnding::class.java)
+    val getCatInfoService = retrofit.create(ICatInfo::class.java)
 
     fun createRetrofitWithoutSSL() : Retrofit {
         return Retrofit.Builder()

@@ -15,6 +15,9 @@ class AboutFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel.gameIntro.observe(this) {
+            binding.title.text = it
+        }
     }
 
     override fun onCreateView(
@@ -27,6 +30,11 @@ class AboutFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getGameIntro()
     }
 
     companion object {
