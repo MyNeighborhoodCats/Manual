@@ -1,12 +1,28 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file(properties['debug.keystore'])
+            keyAlias properties['debug.keystore.alias']
+            keyPassword properties['debug.keystore.password']
+            storePassword properties['debug.keystore.password']
+        }
+//        release {
+//            storeFile file(properties['release.keystore'])
+//            storePassword properties['release.keystore.password']
+//            keyAlias properties['release.keystore.alias']
+//            keyPassword properties['release.keystore.password']
+//        }
+    }
     namespace 'kr.co.vacatio.ylee.my_neighborhood_cats.manual'
     compileSdk 32
 
@@ -60,4 +76,9 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-scalars:$retrofit_version"
+
+    //firebase
+    implementation platform('com.google.firebase:firebase-bom:31.2.2')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
 }
