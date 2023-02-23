@@ -9,17 +9,19 @@ class EndingRepository {
 
     val getEndingService = RetrofitObject.getEndingService
 
-    fun getEnding00() : Flow<Result<String>> = flow {
+    fun getEnding(id : Int) : Flow<Result<String>> = flow {
         Timber.d("${Thread.currentThread().name}")
-        val call = getEndingService.getEnding00()
+        val call = getEndingService.getEnding(id)
         try {
             Timber.d("request : ${call.request()}")
-            val result : Response<String> = call.execute()
+            val result : Response<TextResponse> = call.execute()
             val responseBody = result.body()
             if (!result.isSuccessful || result.code() != 200 || responseBody == null) {
                 emit(Result.failure(Exception("error : ${result.code()} , ${result.message()}")))
+            } else if (responseBody.result == null) {
+                emit(Result.failure(Exception("error : ${result.code()} , result is null")))
             } else {
-                emit(Result.success(responseBody))
+                emit(Result.success(responseBody.result))
             }
         } catch (error : Exception) {
             Timber.d("error")

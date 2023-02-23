@@ -9,6 +9,12 @@ data class CatDto(
     val character2 : String,
     @SerializedName("character3")
     val character3 : String,
+    @SerializedName("value1")
+    val value1 : Float,
+    @SerializedName("value2")
+    val value2 : Float,
+    @SerializedName("value3")
+    val value3 : Float,
     @SerializedName("info")
     val info : String
 )

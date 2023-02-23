@@ -14,6 +14,9 @@ class GuideFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel.endingText.observe(this) {
+            binding.title.text = it
+        }
     }
 
     override fun onCreateView(
@@ -25,6 +28,11 @@ class GuideFragment : Fragment() {
             viewModel.setFragment(MainFragment::class.java.name)
         }
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getEnding(3)
     }
 
     companion object {

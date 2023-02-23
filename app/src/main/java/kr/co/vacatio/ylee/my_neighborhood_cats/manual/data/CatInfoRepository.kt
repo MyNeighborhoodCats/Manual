@@ -9,9 +9,9 @@ class CatInfoRepository {
 
     val getCatInfoService = RetrofitObject.getCatInfoService
 
-    fun getCat1() : Flow<Result<CatDto>> = flow {
+    fun getCat(id : Int) : Flow<Result<CatDto>> = flow {
         Timber.d("${Thread.currentThread().name}")
-        val call = getCatInfoService.getCat1()
+        val call = getCatInfoService.getCat(id)
         try {
             Timber.d("request : ${call.request()}")
             val result : Response<CatDto> = call.execute()

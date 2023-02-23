@@ -4,9 +4,9 @@ import retrofit2.Call
 import retrofit2.http.GET
 
 interface IIntro {
-    @GET("/GameIntro")
-    fun getGameIntro() : Call<String>
+    @GET("/text/GameIntro")
+    fun getGameIntro() : Call<TextResponse>
 
-    @GET("/getProlog")
-    fun getProlog() : Call<String>
+    @GET("/text/getProlog")
+    fun getProlog() : Call<TextResponse>
 }
